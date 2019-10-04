@@ -1,66 +1,85 @@
 import 'package:flutter/material.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  double _height = 400;
+  var _visible = true;
   final controller = PageController(initialPage: 0);
 
   dialogContent(BuildContext context) {
-    return Container(
+    return AnimatedContainer(
+        duration: Duration(seconds: 1),
         height: 400,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
         ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Text(
-              "سال",
-              style: Theme.of(context).textTheme.title,
-            ),
-            Container(
-                height: 35,
-                width: double.infinity,
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: <Widget>[
-                    Text("flash"),
-                    Container(
-                      width: 100,
-                      child: PageView.builder(
-                        physics: BouncingScrollPhysics(),
-                        itemBuilder: (context, index) {
-                          return Align(
-                            child: Text(
-                              "${index}",
-                              style: Theme.of(context).textTheme.body1,
-                            ),
-                          );
-                        },
-                        itemCount: 4,
-                      ),
-                    ),
-                    Text("flash"),
-                  ],
-                )),
-            Text(
-              "ماه",
-              style: Theme.of(context).textTheme.body1,
-            ),
-            Container(
-              height: 25,
-              child: PageView.builder(
-                itemBuilder: (context, index) {
-                  return Align(
-                    child: Text(
-                      "${index}",
-                      style: Theme.of(context).textTheme.body1,
-                    ),
-                  );
+        child: Visibility(
+          visible: _visible,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    _visible = !_visible;
+                  });
+                  print(_visible);
                 },
-                itemCount: 4,
+                child: Text(
+                  "سال",
+                  style: Theme.of(context).textTheme.title,
+                ),
               ),
-            ),
-          ],
+              Container(
+                  height: 35,
+                  width: double.infinity,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: <Widget>[
+                      Text("flash"),
+                      Container(
+                        width: 100,
+                        child: PageView.builder(
+                          physics: BouncingScrollPhysics(),
+                          itemBuilder: (context, index) {
+                            return Align(
+                              child: Text(
+                                "${index}",
+                                style: Theme.of(context).textTheme.body1,
+                              ),
+                            );
+                          },
+                          itemCount: 4,
+                        ),
+                      ),
+                      Text("flash"),
+                    ],
+                  )),
+              Text(
+                "ماه",
+                style: Theme.of(context).textTheme.body1,
+              ),
+              Container(
+                height: 25,
+                child: PageView.builder(
+                  itemBuilder: (context, index) {
+                    return Align(
+                      child: Text(
+                        "${index}",
+                        style: Theme.of(context).textTheme.body1,
+                      ),
+                    );
+                  },
+                  itemCount: 4,
+                ),
+              ),
+            ],
+          ),
         ));
   }
 
@@ -71,7 +90,21 @@ class Home extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),
       ),
-      title: null,
+      title: GestureDetector(
+        onTap: () {
+          print("hiding content");
+          setState(() {
+            _visible = !_visible;
+          });
+          print(_visible);
+        },
+        child: Align(
+          alignment: Alignment.centerRight,
+          child: Text(
+            "سال",
+          ),
+        ),
+      ),
       content: dialogContent(context),
       backgroundColor: Color(0xFF203858),
       contentPadding: EdgeInsets.only(
@@ -91,6 +124,7 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("build called");
     return Scaffold(
       appBar: AppBar(
         title: Text("persian date picker"),

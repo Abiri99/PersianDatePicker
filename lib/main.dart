@@ -34,6 +34,17 @@ class MyApp extends StatelessWidget {
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
         primarySwatch: Colors.blue,
+        textTheme: TextTheme(
+          body1: TextStyle(
+            color: Colors.white,
+          ),
+          subhead: TextStyle(
+            color: Colors.white,
+          ),
+          title: TextStyle(
+            color: Colors.white,
+          ),
+        )
       ),
       home: Home(),
     );

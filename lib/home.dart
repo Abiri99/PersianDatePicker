@@ -5,26 +5,61 @@ class Home extends StatelessWidget {
 
   dialogContent(BuildContext context) {
     return Container(
-        height: 350,
+        height: 400,
         decoration: BoxDecoration(
-          color: Colors.red,
-          borderRadius: BorderRadius.circular(8)
+          borderRadius: BorderRadius.circular(8),
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            Text("سال"),
+            Text(
+              "سال",
+              style: Theme.of(context).textTheme.title,
+            ),
             Container(
-              height: 50,
+                height: 35,
+                width: double.infinity,
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: <Widget>[
+                    Text("flash"),
+                    Container(
+                      width: 100,
+                      child: PageView.builder(
+                        physics: BouncingScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          return Align(
+                            child: Text(
+                              "${index}",
+                              style: Theme.of(context).textTheme.body1,
+                            ),
+                          );
+                        },
+                        itemCount: 4,
+                      ),
+                    ),
+                    Text("flash"),
+                  ],
+                )),
+            Text(
+              "ماه",
+              style: Theme.of(context).textTheme.body1,
+            ),
+            Container(
+              height: 25,
               child: PageView.builder(
                 itemBuilder: (context, index) {
                   return Align(
-                    child: Text("${index}"),
+                    child: Text(
+                      "${index}",
+                      style: Theme.of(context).textTheme.body1,
+                    ),
                   );
                 },
                 itemCount: 4,
               ),
-            )
+            ),
           ],
         ));
   }
@@ -38,7 +73,13 @@ class Home extends StatelessWidget {
       ),
       title: null,
       content: dialogContent(context),
-      contentPadding: EdgeInsets.all(0),
+      backgroundColor: Color(0xFF203858),
+      contentPadding: EdgeInsets.only(
+        left: 0,
+        right: 0,
+        top: 16,
+        bottom: 16,
+      ),
     );
 
     showDialog(

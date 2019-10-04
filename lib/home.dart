@@ -5,13 +5,15 @@ class Home extends StatelessWidget {
 
   dialogContent(BuildContext context) {
     return Container(
-        height: 50,
+        height: 350,
         decoration: BoxDecoration(
           color: Colors.red,
+          borderRadius: BorderRadius.circular(8)
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
+            Text("سال"),
             Container(
               height: 50,
               child: PageView.builder(
@@ -36,6 +38,7 @@ class Home extends StatelessWidget {
       ),
       title: null,
       content: dialogContent(context),
+      contentPadding: EdgeInsets.all(0),
     );
 
     showDialog(

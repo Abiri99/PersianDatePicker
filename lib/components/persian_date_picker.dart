@@ -13,7 +13,7 @@ class pdp extends StatefulWidget {
 class _pdpState extends State<pdp> {
   var _selectedYear, _selectedMonth;
 
-  var _visible = true;
+  var _visible = false;
   double _height1 = 50;
   double _height2 = 300;
 
@@ -33,92 +33,57 @@ class _pdpState extends State<pdp> {
   Widget build(BuildContext context) {
     print("hi from pdp");
     return Container(
-      height: 350,
-      width: 500,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Container(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      _height2 = 0;
-                    });
-                    print(_visible);
-                  },
-                  child: Text(
-                    "سال",
-                  ),
+        height: 400,
+        width: MediaQuery.of(context).size.width * 0.8,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Stack(
+          children: <Widget>[
+            Positioned(
+              top: 74,
+              right: 0,
+              left: 0,
+              child: Container(
+                height: 300,
+                color: Colors.red,
+                width: MediaQuery.of(context).size.width * 0.7,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
                 ),
-                Container(
-                    height: 35,
-                    width: double.infinity,
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: <Widget>[
-                        Icon(
-                          Icons.arrow_back_ios,
-                          color: Colors.white24,
-                          size: 16,
-                        ),
-                        Container(
-                          width: 100,
-                          child: PageView.builder(
-                            controller: widget.yearController,
-                            onPageChanged: onYearChange,
-                            itemBuilder: (context, index) {
-                              return Align(
-                                child: Text("${index}",
-                                    style: TextStyle(
-                                        color: index == _selectedYear
-                                            ? Colors.white
-                                            : Colors.grey,
-                                        fontSize:
-                                            index == _selectedYear ? 18 : 12)),
-                              );
-                            },
-                            itemCount: 4,
-                          ),
-                        ),
-                        Icon(
-                          Icons.arrow_forward_ios,
-                          color: Colors.white24,
-                          size: 16,
-                        ),
-                      ],
-                    )),
-                Text(
-                  "ماه",
-                  style: Theme.of(context).textTheme.body1,
-                ),
-                Container(
-                  height: 25,
-                  child: PageView.builder(
-                    controller: widget.monthController,
-                    onPageChanged: onMonthChange,
-                    itemBuilder: (context, index) {
-                      return Align(
-                        child: Text(
-                          "${index}",
-                          style: TextStyle(
-                              color: index == _selectedMonth
-                                  ? Colors.blue
-                                  : Colors.white),
-                        ),
-                      );
-                    },
-                    itemCount: 4,
-                  ),
-                ),
-              ],
+              ),
             ),
-          )
-        ],
-      ),
-    );
+            Positioned(
+              right: 16,
+              left: 16,
+              top: 16,
+              child: GestureDetector(
+                onTap: () {
+                  setState(() {
+                    _height1 = 150 - _height1;
+                    _visible = !_visible;
+                  });
+                },
+                child: AnimatedContainer(
+                  duration: Duration(milliseconds: 240),
+                  height: _height1,
+                  decoration: BoxDecoration(
+                    color: Color(0xFF8234DB),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Column(
+                    children: <Widget>[
+                      Text("hi"),
+                      Visibility(
+                        visible: _visible,
+                        child: Text("hi2"),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            )
+          ],
+        ));
   }
 }

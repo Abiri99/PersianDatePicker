@@ -20,7 +20,7 @@ class _pdpDialogState extends State<pdpDialog> {
       ),
       title: null,
       content: pdp(),
-      backgroundColor: _sColor,
+      backgroundColor: Colors.white,
       contentPadding: EdgeInsets.only(
         left: 0,
         right: 0,

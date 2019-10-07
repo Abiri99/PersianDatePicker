@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class slider extends StatefulWidget {
-
   final PageView child;
 
   slider({this.child});
@@ -11,14 +10,13 @@ class slider extends StatefulWidget {
 }
 
 class _sliderState extends State<slider> {
-  
-
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 50,
+        height: 25,
         width: double.infinity,
         child: Row(
+          mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
             Icon(

@@ -66,11 +66,15 @@ class _pdpState extends State<pdp> {
                             ? Colors.white
                             : Colors.white30,
                         fontSize: index == _selectedIndex ? 18 : 14,
+                        backgroundColor: Colors.black,
                       );
-                      return Text(
-                        index.toString(),
-                        textAlign: TextAlign.center,
-                        style: style,
+                      return Align(
+                        alignment: Alignment.center,
+                        child: Text(
+                          index.toString(),
+                          textAlign: TextAlign.center,
+                          style: style,
+                        ),
                       );
                     },
                     itemCount: 12,

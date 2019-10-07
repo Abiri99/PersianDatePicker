@@ -7,10 +7,6 @@ class pdpDialog extends StatefulWidget {
 }
 
 class _pdpDialogState extends State<pdpDialog> {
-  double _height = 400;
-  var _fColor = Colors.white, _sColor = Color(0xFF8234DB);
-  double _cHeight = 68, _cWidth = 68;
-  var _textColor = Colors.blueGrey;
 
   @override
   Widget build(BuildContext context) {

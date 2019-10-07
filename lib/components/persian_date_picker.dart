@@ -7,104 +7,16 @@ class pdp extends StatefulWidget {
   PageController _monthController =
       PageController(viewportFraction: 0.35, initialPage: 0);
 
-  var months = [
-    Container(
-      color: Colors.black,
-      child: Text(
-        "فروردین",
-        textAlign: TextAlign.center,
-      ),
-      width: 50,
-    ),
-    Container(
-      color: Colors.red,
-      child: Text(
-        "فروردین",
-        textAlign: TextAlign.center,
-      ),
-      width: 50,
-    ),
-    Container(
-      color: Colors.black,
-      child: Text(
-        "فروردین",
-        textAlign: TextAlign.center,
-      ),
-      width: 50,
-    ),
-    Container(
-      color: Colors.red,
-      child: Text(
-        "فروردین",
-        textAlign: TextAlign.center,
-      ),
-      width: 50,
-    ),
-    Container(
-      color: Colors.black,
-      child: Text(
-        "فروردین",
-        textAlign: TextAlign.center,
-      ),
-      width: 50,
-    ),
-    Container(
-      color: Colors.red,
-      child: Text(
-        "فروردین",
-        textAlign: TextAlign.center,
-      ),
-      width: 50,
-    ),
-    Container(
-      color: Colors.black,
-      child: Text(
-        "فروردین",
-        textAlign: TextAlign.center,
-      ),
-      width: 50,
-    ),
-    Container(
-      color: Colors.red,
-      child: Text(
-        "فروردین",
-        textAlign: TextAlign.center,
-      ),
-      width: 50,
-    ),
-    Container(
-      color: Colors.black,
-      child: Text(
-        "فروردین",
-        textAlign: TextAlign.center,
-      ),
-      width: 50,
-    ),
-    Container(
-      color: Colors.red,
-      child: Text(
-        "فروردین",
-        textAlign: TextAlign.center,
-      ),
-      width: 50,
-    ),
-    Container(
-      color: Colors.black,
-      child: Text(
-        "فروردین",
-        textAlign: TextAlign.center,
-      ),
-      width: 50,
-    ),
-    Container(
-      color: Colors.red,
-      child: Text(
-        "فروردین",
-        textAlign: TextAlign.center,
-      ),
-      width: 50,
-    ),
-  ];
+  String replaceFarsiNumber(String input) {
+    const english = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+    const farsi = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
+
+    for (int i = 0; i < english.length; i++) {
+      input = input.replaceAll(english[i], farsi[i]);
+    }
+
+    return input;
+  }
 
   @override
   _pdpState createState() => _pdpState();
@@ -112,6 +24,95 @@ class pdp extends StatefulWidget {
 
 class _pdpState extends State<pdp> {
   var _selectedYear, _selectedMonth;
+
+  List<Widget> renderMonths() {
+    return [
+      Container(
+        child: Text(
+          "فروردین",
+          textAlign: TextAlign.center,
+        ),
+        width: 50,
+      ),
+      Container(
+        child: Text(
+          "اردیبهشت",
+          textAlign: TextAlign.center,
+        ),
+        width: 50,
+      ),
+      Container(
+        child: Text(
+          "خرداد",
+          textAlign: TextAlign.center,
+        ),
+        width: 50,
+      ),
+      Container(
+        child: Text(
+          "تیر",
+          textAlign: TextAlign.center,
+        ),
+        width: 50,
+      ),
+      Container(
+        child: Text(
+          "مرداد",
+          textAlign: TextAlign.center,
+        ),
+        width: 50,
+      ),
+      Container(
+        child: Text(
+          "شهریور",
+          textAlign: TextAlign.center,
+        ),
+        width: 50,
+      ),
+      Container(
+        child: Text(
+          "مهر",
+          textAlign: TextAlign.center,
+        ),
+        width: 50,
+      ),
+      Container(
+        child: Text(
+          "آبان",
+          textAlign: TextAlign.center,
+        ),
+        width: 50,
+      ),
+      Container(
+        child: Text(
+          "آذر",
+          textAlign: TextAlign.center,
+        ),
+        width: 50,
+      ),
+      Container(
+        child: Text(
+          "دی",
+          textAlign: TextAlign.center,
+        ),
+        width: 50,
+      ),
+      Container(
+        child: Text(
+          "بهمن",
+          textAlign: TextAlign.center,
+        ),
+        width: 50,
+      ),
+      Container(
+        child: Text(
+          "اسفند",
+          textAlign: TextAlign.center,
+        ),
+        width: 50,
+      ),
+    ];
+  }
 
   // var _selectedIndex = 0;
 
@@ -180,12 +181,23 @@ class _pdpState extends State<pdp> {
                         top: 16, bottom: 16, right: 36, left: 36)),
                 slider(
                   child: PageView(
+                    reverse: true,
                     controller: widget._monthController,
                     onPageChanged: onMonthChange,
-                    children: widget.months,
+                    children: renderMonths(),
                   ),
                 ),
               ],
+            ),
+          ),
+          Container(
+            height: MediaQuery.of(context).size.height * 0.07,
+            width: double.infinity,
+            padding: const EdgeInsets.only(left: 16, right: 16),
+            color: Colors.red,
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[Text("hi")],
             ),
           )
         ],

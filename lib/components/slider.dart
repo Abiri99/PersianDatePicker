@@ -13,6 +13,7 @@ class _sliderState extends State<slider> {
   @override
   Widget build(BuildContext context) {
     return Container(
+        padding: EdgeInsets.only(left: 16, right: 16),
         height: 25,
         width: double.infinity,
         child: Row(
@@ -25,7 +26,6 @@ class _sliderState extends State<slider> {
               color: Colors.black54,
             ),
             Container(
-              color: Colors.red,
               width: MediaQuery.of(context).size.width * 0.6,
               alignment: Alignment.center,
               child: widget.child,

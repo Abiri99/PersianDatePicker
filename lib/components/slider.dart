@@ -23,7 +23,7 @@ class _sliderState extends State<slider> {
             Icon(
               Icons.arrow_back_ios,
               size: 14,
-              color: Colors.black54,
+              color: Colors.white38,
             ),
             Container(
               width: MediaQuery.of(context).size.width * 0.6,
@@ -50,7 +50,7 @@ class _sliderState extends State<slider> {
             Icon(
               Icons.arrow_forward_ios,
               size: 14,
-              color: Colors.black54,
+              color: Colors.white38,
             ),
           ],
         ));

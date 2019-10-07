@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 
 class pdp extends StatefulWidget {
   PageController _yearController =
-      PageController(viewportFraction: 0.2, initialPage: 0);
+      PageController(viewportFraction: 0.2, initialPage: 379);
   PageController _monthController =
-      PageController(viewportFraction: 0.35, initialPage: 0);
+      PageController(viewportFraction: 0.35, initialPage: 1000);
 
   String replaceFarsiNumber(String input) {
     const english = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
@@ -160,18 +160,19 @@ class _pdpState extends State<pdp> {
                         color: index == _selectedYear
                             ? Colors.white
                             : Colors.white30,
-                        fontSize: index == _selectedYear ? 18 : 14,
+                        fontSize: index == _selectedYear ? 20 : 16,
                       );
+                      var newIndex = index + 1000;
                       return Align(
                         alignment: Alignment.center,
                         child: Text(
-                          index.toString(),
+                          widget.replaceFarsiNumber(newIndex.toString()),
                           textAlign: TextAlign.center,
                           style: style,
                         ),
                       );
                     },
-                    itemCount: 12,
+                    itemCount: 2000,
                   ),
                 ),
                 Container(

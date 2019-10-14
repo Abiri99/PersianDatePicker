@@ -12,7 +12,7 @@ class _pdpDialogState extends State<pdpDialog> {
   Widget build(BuildContext context) {
     return AlertDialog(
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(12),
       ),
       title: null,
       content: pdp(),

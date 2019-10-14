@@ -1,11 +1,50 @@
 import 'package:fl_persian_date_picker/components/slider.dart';
 import 'package:flutter/material.dart';
+import 'package:shamsi_date/shamsi_date.dart';
 
 class pdp extends StatefulWidget {
   PageController _yearController =
       PageController(viewportFraction: 0.2, initialPage: 379);
   PageController _monthController =
       PageController(viewportFraction: 0.35, initialPage: 1000);
+
+  String currentDate;
+
+  pdp() {
+    currentDate = replaceFarsiNumber(Jalali.now().toString());
+  }
+
+  String renderMonthsByIndex(int index) {
+    print("index: " + index.toString());
+    switch (index) {
+      case 0:
+        return "فروردین";
+      case 1:
+        return "اردیبهشت";
+      case 2:
+        return "خرداد";
+      case 3:
+        return "تیر";
+      case 4:
+        return "مرداد";
+      case 5:
+        return "شهریور";
+      case 6:
+        return "مهر";
+      case 7:
+        return "آبان";
+      case 8:
+        return "آذر";
+      case 9:
+        return "دی";
+      case 10:
+        return "بهمن";
+      case 11:
+        return "اسفند";
+      default:
+        return "ماه";
+    }
+  }
 
   String replaceFarsiNumber(String input) {
     const english = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
@@ -130,7 +169,6 @@ class _pdpState extends State<pdp> {
 
   @override
   Widget build(BuildContext context) {
-    print("hi from pdp");
     return Container(
       height: MediaQuery.of(context).size.height * 0.7,
       width: MediaQuery.of(context).size.width * 0.8,
@@ -160,7 +198,7 @@ class _pdpState extends State<pdp> {
                         color: index == _selectedYear
                             ? Colors.white
                             : Colors.white30,
-                        fontSize: index == _selectedYear ? 20 : 16,
+                        fontSize: index == _selectedYear ? 18 : 16,
                       );
                       var newIndex = index + 1000;
                       return Align(
@@ -176,17 +214,43 @@ class _pdpState extends State<pdp> {
                   ),
                 ),
                 Container(
-                    height: 1,
-                    color: Colors.white24,
-                    margin: EdgeInsets.only(
-                        top: 16, bottom: 16, right: 36, left: 36)),
+                  height: 1,
+                  color: Colors.white24,
+                  margin:
+                      EdgeInsets.only(top: 16, bottom: 16, right: 36, left: 36),
+                ),
                 slider(
-                  child: PageView(
+                  child: PageView.builder(
                     reverse: true,
                     controller: widget._monthController,
                     onPageChanged: onMonthChange,
-                    children: renderMonths(),
+                    itemCount: 12,
+                    itemBuilder: (context, index) {
+                      var style = TextStyle(
+                        color: index == _selectedMonth
+                            ? Colors.white
+                            : Colors.white30,
+                        fontSize: index == _selectedMonth ? 18 : 16,
+                      );
+                      return Container(
+                        // alignment: Alignment.center,
+                        child: Align(
+                          alignment: Alignment.center,
+                          child: Text(
+                            widget.renderMonthsByIndex(index),
+                            textAlign: TextAlign.center,
+                            style: style,
+                          ),
+                        ),
+                      );
+                    },
                   ),
+                ),
+                Container(
+                  height: 1,
+                  color: Colors.white24,
+                  margin:
+                      EdgeInsets.only(top: 16, bottom: 16, right: 36, left: 36),
                 ),
               ],
             ),
@@ -195,12 +259,32 @@ class _pdpState extends State<pdp> {
             height: MediaQuery.of(context).size.height * 0.07,
             width: double.infinity,
             padding: const EdgeInsets.only(left: 16, right: 16),
-            color: Colors.red,
             child: Row(
               mainAxisSize: MainAxisSize.min,
-              children: <Widget>[Text("hi")],
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text(
+                  widget.currentDate,
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.black87,
+                  ),
+                ),
+                RaisedButton(
+                  color: Color(0xFF8234DB),
+                  child: Text(
+                    "تمام",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () {
+                    //dispose modal
+                  },
+                  shape: new RoundedRectangleBorder(
+                      borderRadius: new BorderRadius.circular(6.0)),
+                ),
+              ],
             ),
-          )
+          ),
         ],
       ),
     );

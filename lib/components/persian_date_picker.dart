@@ -1,20 +1,22 @@
 import 'package:fl_persian_date_picker/components/month_slider.dart';
-import 'package:fl_persian_date_picker/components/slider.dart';
 import 'package:fl_persian_date_picker/components/year_slider.dart';
+import 'package:fl_persian_date_picker/format_persian_date.dart';
 import 'package:flutter/material.dart';
 import 'package:shamsi_date/shamsi_date.dart';
 import '../replace_farsi_number.dart';
 
 class pdp extends StatefulWidget {
   PageController _yearController;
-      
+
   PageController _monthController;
 
   var currentDate = Jalali.now();
 
   pdp() {
-    _yearController = PageController(viewportFraction: 0.2, initialPage: currentDate.year -1000);
-    _monthController = PageController(viewportFraction: 0.35, initialPage: currentDate.month - 1);
+    _yearController = PageController(
+        viewportFraction: 0.2, initialPage: currentDate.year - 1000);
+    _monthController = PageController(
+        viewportFraction: 0.35, initialPage: currentDate.month - 1);
   }
 
   @override
@@ -127,6 +129,14 @@ class _pdpState extends State<pdp> {
     });
   }
 
+  getSelectedYear() {
+    return _selectedYear == null ? widget.currentDate.year : _selectedYear;
+  }
+
+  getSelectedMonth() {
+    return _selectedMonth == null ? widget.currentDate.month : _selectedMonth;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -149,20 +159,39 @@ class _pdpState extends State<pdp> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                yearSlider(widget._yearController, _selectedYear, onYearChanged),
+                yearSlider(
+                    widget._yearController, _selectedYear, onYearChanged),
                 Container(
                   height: 1,
                   color: Colors.white24,
                   margin:
                       EdgeInsets.only(top: 16, bottom: 16, right: 36, left: 36),
                 ),
-                monthSlider(widget._monthController, _selectedMonth, onMonthChange),
+                monthSlider(
+                    widget._monthController, _selectedMonth, onMonthChange),
                 Container(
                   height: 1,
                   color: Colors.white24,
                   margin:
                       EdgeInsets.only(top: 16, bottom: 16, right: 36, left: 36),
                 ),
+                Expanded(
+                  // height: 100,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.red
+                    ),
+                    alignment: Alignment.center,
+                    child: GridView.builder(
+                      itemCount: Jalali(getSelectedYear(), getSelectedMonth()).monthLength,
+                      gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 7),
+                      itemBuilder: (BuildContext context, int index) {
+                        return Text(replaceFarsiNumber((index +1).toString()));
+                      },
+                    ),
+                  ),
+                )
               ],
             ),
           ),
@@ -175,7 +204,7 @@ class _pdpState extends State<pdp> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text(
-                  replaceFarsiNumber(widget.currentDate.toString()),
+                  replaceFarsiNumber(formatPersianDate(widget.currentDate)),
                   style: TextStyle(
                     fontSize: 18,
                     color: Colors.black87,

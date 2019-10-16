@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
 import 'persian_date_picker.dart';
 
-class pdpDialog extends StatefulWidget {
-  @override
-  _pdpDialogState createState() => _pdpDialogState();
-}
-
-class _pdpDialogState extends State<pdpDialog> {
+class PdpDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +10,7 @@ class _pdpDialogState extends State<pdpDialog> {
         borderRadius: BorderRadius.circular(12),
       ),
       title: null,
-      content: pdp(),
+      content: Pdp(),
       backgroundColor: Colors.white,
       contentPadding: EdgeInsets.only(
         left: 0,

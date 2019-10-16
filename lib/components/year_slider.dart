@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'slider.dart';
 import '../replace_farsi_number.dart';
 
-class yearSlider extends StatelessWidget {
+class YearSlider extends StatelessWidget {
   PageController _yearController;
   int _selectedYear;
   Function onYearChanged;
 
-  yearSlider(this._yearController, this._selectedYear, this.onYearChanged);
+  YearSlider(this._yearController, this._selectedYear, this.onYearChanged);
 
   @override
   Widget build(BuildContext context) {

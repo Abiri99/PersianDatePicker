@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import './slider.dart';
 
-class monthSlider extends StatelessWidget {
+class MonthSlider extends StatelessWidget {
 
   PageController _monthController;
   int _selectedMonth;
   Function onMonthChange;
 
-  monthSlider(this._monthController, this._selectedMonth, this.onMonthChange);
+  MonthSlider(this._monthController, this._selectedMonth, this.onMonthChange);
 
   String renderMonthsByIndex(int index) {
     print("index: " + index.toString());

@@ -1,6 +1,5 @@
-import 'package:fl_persian_date_picker/components/pdp_dialog.dart';
 import 'package:flutter/material.dart';
-import './components/persian_date_picker.dart';
+import 'components/pdp_dialog.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -17,7 +16,7 @@ class _HomeState extends State<Home> {
     showDialog(
         context: context,
         builder: (BuildContext context) {
-          return pdpDialog();
+          return PdpDialog();
         });
   }
 

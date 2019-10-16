@@ -6,14 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:shamsi_date/shamsi_date.dart';
 import '../replace_farsi_number.dart';
 
-class pdp extends StatefulWidget {
+class Pdp extends StatefulWidget {
   PageController _yearController;
 
   PageController _monthController;
 
   var currentDate = Jalali.now();
 
-  pdp() {
+  Pdp() {
     _yearController = PageController(
         viewportFraction: 0.2, initialPage: currentDate.year - 1000);
     _monthController = PageController(
@@ -21,10 +21,10 @@ class pdp extends StatefulWidget {
   }
 
   @override
-  _pdpState createState() => _pdpState();
+  _PdpState createState() => _PdpState();
 }
 
-class _pdpState extends State<pdp> {
+class _PdpState extends State<Pdp> {
   var _selectedYear, _selectedMonth;
 
   List<Widget> renderMonths() {
@@ -170,10 +170,10 @@ class _pdpState extends State<pdp> {
                   ),
                 ),
                 Line(),
-                yearSlider(
+                YearSlider(
                     widget._yearController, _selectedYear, onYearChanged),
                 Line(),
-                monthSlider(
+                MonthSlider(
                     widget._monthController, _selectedMonth, onMonthChange),
                 Line(),
                 Expanded(
@@ -181,7 +181,7 @@ class _pdpState extends State<pdp> {
                   child: Container(
                     alignment: Alignment.center,
                     child: GridView.builder(
-                      itemCount: Jalali(getSelectedYear(), getSelectedMonth()).monthLength,
+                      itemCount: Jalali(getSelectedYear(), getSelectedMonth()+1).monthLength,
                       gridDelegate:
                           new SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 7),
@@ -191,9 +191,7 @@ class _pdpState extends State<pdp> {
                           alignment: Alignment.center,
                           child: Text(
                             replaceFarsiNumber((index + 1).toString()),
-                            style: TextStyle(
-                              
-                            ),
+                            style: TextStyle(fontSize: 18),
                           ),
                         );
                       },
@@ -203,36 +201,6 @@ class _pdpState extends State<pdp> {
               ],
             ),
           ),
-          // Container(
-          //   height: MediaQuery.of(context).size.height * 0.07,
-          //   width: double.infinity,
-          //   padding: const EdgeInsets.only(left: 16, right: 16),
-          //   child: Row(
-          //     mainAxisSize: MainAxisSize.min,
-          //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //     children: <Widget>[
-          //       Text(
-          //         replaceFarsiNumber(formatPersianDate(widget.currentDate)),
-          //         style: TextStyle(
-          //           fontSize: 18,
-          //           color: Colors.black54,
-          //         ),
-          //       ),
-          //       RaisedButton(
-          //         color: Color(0xFF8234DB),
-          //         child: Text(
-          //           "تمام",
-          //           style: TextStyle(color: Colors.white),
-          //         ),
-          //         onPressed: () {
-          //           //dispose modal
-          //         },
-          //         shape: new RoundedRectangleBorder(
-          //             borderRadius: new BorderRadius.circular(6.0)),
-          //       ),
-          //     ],
-          //   ),
-          // ),
         ],
       ),
     );

@@ -1,3 +1,4 @@
+import 'package:fl_persian_date_picker/components/line.dart';
 import 'package:fl_persian_date_picker/components/month_slider.dart';
 import 'package:fl_persian_date_picker/components/year_slider.dart';
 import 'package:fl_persian_date_picker/format_persian_date.dart';
@@ -140,7 +141,7 @@ class _pdpState extends State<pdp> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.7,
+      // height: MediaQuery.of(context).size.height * 0.7,
       width: MediaQuery.of(context).size.width * 0.8,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
@@ -149,7 +150,7 @@ class _pdpState extends State<pdp> {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           Container(
-            height: MediaQuery.of(context).size.height * 0.63,
+            height: MediaQuery.of(context).size.height * 0.7,
             width: double.infinity,
             padding: const EdgeInsets.only(top: 24),
             decoration: BoxDecoration(
@@ -159,22 +160,22 @@ class _pdpState extends State<pdp> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
+                Container(
+                  child: Text(
+                    replaceFarsiNumber(formatPersianDate(widget.currentDate)),
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                Line(),
                 yearSlider(
                     widget._yearController, _selectedYear, onYearChanged),
-                Container(
-                  height: 1,
-                  color: Colors.white24,
-                  margin:
-                      EdgeInsets.only(top: 16, bottom: 16, right: 36, left: 36),
-                ),
+                Line(),
                 monthSlider(
                     widget._monthController, _selectedMonth, onMonthChange),
-                Container(
-                  height: 1,
-                  color: Colors.white24,
-                  margin:
-                      EdgeInsets.only(top: 16, bottom: 16, right: 36, left: 36),
-                ),
+                Line(),
                 Expanded(
                   // height: 100,
                   child: Container(
@@ -202,36 +203,36 @@ class _pdpState extends State<pdp> {
               ],
             ),
           ),
-          Container(
-            height: MediaQuery.of(context).size.height * 0.07,
-            width: double.infinity,
-            padding: const EdgeInsets.only(left: 16, right: 16),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text(
-                  replaceFarsiNumber(formatPersianDate(widget.currentDate)),
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.black54,
-                  ),
-                ),
-                RaisedButton(
-                  color: Color(0xFF8234DB),
-                  child: Text(
-                    "تمام",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  onPressed: () {
-                    //dispose modal
-                  },
-                  shape: new RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(6.0)),
-                ),
-              ],
-            ),
-          ),
+          // Container(
+          //   height: MediaQuery.of(context).size.height * 0.07,
+          //   width: double.infinity,
+          //   padding: const EdgeInsets.only(left: 16, right: 16),
+          //   child: Row(
+          //     mainAxisSize: MainAxisSize.min,
+          //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //     children: <Widget>[
+          //       Text(
+          //         replaceFarsiNumber(formatPersianDate(widget.currentDate)),
+          //         style: TextStyle(
+          //           fontSize: 18,
+          //           color: Colors.black54,
+          //         ),
+          //       ),
+          //       RaisedButton(
+          //         color: Color(0xFF8234DB),
+          //         child: Text(
+          //           "تمام",
+          //           style: TextStyle(color: Colors.white),
+          //         ),
+          //         onPressed: () {
+          //           //dispose modal
+          //         },
+          //         shape: new RoundedRectangleBorder(
+          //             borderRadius: new BorderRadius.circular(6.0)),
+          //       ),
+          //     ],
+          //   ),
+          // ),
         ],
       ),
     );

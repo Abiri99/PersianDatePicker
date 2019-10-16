@@ -178,16 +178,23 @@ class _pdpState extends State<pdp> {
                 Expanded(
                   // height: 100,
                   child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.red
-                    ),
                     alignment: Alignment.center,
                     child: GridView.builder(
                       itemCount: Jalali(getSelectedYear(), getSelectedMonth()).monthLength,
-                      gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 7),
+                      gridDelegate:
+                          new SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 7),
                       itemBuilder: (BuildContext context, int index) {
-                        return Text(replaceFarsiNumber((index +1).toString()));
+                        return Container(
+                          width: double.infinity,
+                          alignment: Alignment.center,
+                          child: Text(
+                            replaceFarsiNumber((index + 1).toString()),
+                            style: TextStyle(
+                              
+                            ),
+                          ),
+                        );
                       },
                     ),
                   ),
@@ -207,7 +214,7 @@ class _pdpState extends State<pdp> {
                   replaceFarsiNumber(formatPersianDate(widget.currentDate)),
                   style: TextStyle(
                     fontSize: 18,
-                    color: Colors.black87,
+                    color: Colors.black54,
                   ),
                 ),
                 RaisedButton(

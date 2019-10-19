@@ -125,12 +125,14 @@ class _PdpState extends State<Pdp> {
   onYearChanged(int number) {
     setState(() {
       _selectedYear = number;
+      _selectedDay = null;
     });
   }
 
   onMonthChange(int monthIndex) {
     setState(() {
       _selectedMonth = monthIndex;
+      _selectedDay = null;
     });
   }
 
@@ -145,7 +147,7 @@ class _PdpState extends State<Pdp> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.8,
+      height: MediaQuery.of(context).size.height * 0.71,
       width: MediaQuery.of(context).size.width * 0.8,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
@@ -154,7 +156,7 @@ class _PdpState extends State<Pdp> {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           Container(
-            height: MediaQuery.of(context).size.height * 0.8,
+            height: MediaQuery.of(context).size.height * 0.71,
             width: double.infinity,
             padding: const EdgeInsets.only(top: 24),
             decoration: BoxDecoration(
@@ -188,7 +190,7 @@ class _PdpState extends State<Pdp> {
                   decoration: BoxDecoration(
                     boxShadow: [
                       const BoxShadow(
-                        color: Colors.black87,
+                        color: Colors.black54,
                         offset: const Offset(0.0, 0.0),
                       ),
                       const BoxShadow(
@@ -321,11 +323,11 @@ class _PdpState extends State<Pdp> {
                   width: double.infinity,
                   child: FlatButton(
                     onPressed: () {
-                      print("dialog closed");
+                      Navigator.of(context).pop();
                     },
                     child: Text(
                       "بستن",
-                      style: TextStyle(color: Colors.blueAccent),
+                      style: TextStyle(color: Colors.blue, fontSize: 16),
                     ),
                   ),
                 )

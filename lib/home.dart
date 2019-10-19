@@ -36,7 +36,7 @@ class _HomeState extends State<Home> {
       appBar: AppBar(
         title: Text("persian date picker"),
       ),
-      backgroundColor: Colors.blue,
+      // backgroundColor: Colors.blue,
       body: Center(
         child: RaisedButton(
           color: Colors.orange,

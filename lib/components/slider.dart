@@ -14,8 +14,9 @@ class _sliderState extends State<slider> {
   Widget build(BuildContext context) {
     return Container(
         padding: EdgeInsets.only(left: 16, right: 16),
-        height: 25,
+        height: 36,
         width: double.infinity,
+        // color: Colors.red,
         child: Row(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.spaceAround,

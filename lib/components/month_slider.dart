@@ -52,7 +52,7 @@ class MonthSlider extends StatelessWidget {
         itemBuilder: (context, index) {
           var style = TextStyle(
             color: index == _selectedMonth ? Colors.white : Colors.white30,
-            fontSize: index == _selectedMonth ? 18 : 16,
+            fontSize: index == _selectedMonth ? 20 : 18,
           );
           return Container(
             // alignment: Alignment.center,

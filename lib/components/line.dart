@@ -6,7 +6,7 @@ class Line extends StatelessWidget {
     return Container(
       height: 1,
       color: Colors.white24,
-      margin: EdgeInsets.only(top: 16, bottom: 16, right: 36, left: 36),
+      margin: EdgeInsets.only(top: 4, bottom: 4, right: 36, left: 36),
     );
   }
 }

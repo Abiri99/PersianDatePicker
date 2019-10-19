@@ -3,6 +3,11 @@ import 'persian_date_picker.dart';
 
 class PdpDialog extends StatelessWidget {
 
+  Function setDate;
+  PdpDialog({
+    @required this.setDate
+  });
+
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -10,7 +15,7 @@ class PdpDialog extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
       ),
       title: null,
-      content: Pdp(),
+      content: Pdp(setDate),
       backgroundColor: Colors.white,
       contentPadding: EdgeInsets.only(
         left: 0,

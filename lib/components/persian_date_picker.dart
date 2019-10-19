@@ -7,15 +7,15 @@ import 'package:shamsi_date/shamsi_date.dart';
 import '../replace_farsi_number.dart';
 
 class Pdp extends StatefulWidget {
+  var setDate;
   PageController _yearController;
-
   PageController _monthController;
-
   var currentDate = Jalali.now();
 
-  Pdp() {
-    _yearController = PageController(
-        viewportFraction: 0.2, initialPage: currentDate.year - 1000);
+  Pdp(setDate) {
+    this.setDate = setDate;
+    _yearController =
+        PageController(viewportFraction: 0.2, initialPage: currentDate.year);
     _monthController = PageController(
         viewportFraction: 0.35, initialPage: currentDate.month - 1);
   }
@@ -25,7 +25,7 @@ class Pdp extends StatefulWidget {
 }
 
 class _PdpState extends State<Pdp> {
-  var _selectedYear, _selectedMonth;
+  var _selectedYear, _selectedMonth, _selectedDay;
 
   List<Widget> renderMonths() {
     return [
@@ -117,6 +117,10 @@ class _PdpState extends State<Pdp> {
   }
 
   // var _selectedIndex = 0;
+  _PdpState() {
+    _selectedYear = Jalali.now().year;
+    _selectedMonth = Jalali.now().month - 1;
+  }
 
   onYearChanged(int number) {
     setState(() {
@@ -141,7 +145,7 @@ class _PdpState extends State<Pdp> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // height: MediaQuery.of(context).size.height * 0.7,
+      height: MediaQuery.of(context).size.height * 0.75,
       width: MediaQuery.of(context).size.width * 0.8,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
@@ -150,7 +154,7 @@ class _PdpState extends State<Pdp> {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           Container(
-            height: MediaQuery.of(context).size.height * 0.7,
+            height: MediaQuery.of(context).size.height * 0.75,
             width: double.infinity,
             padding: const EdgeInsets.only(top: 24),
             decoration: BoxDecoration(
@@ -179,22 +183,67 @@ class _PdpState extends State<Pdp> {
                 Expanded(
                   // height: 100,
                   child: Container(
+                    padding: EdgeInsets.only(left: 8, right: 8),
                     alignment: Alignment.center,
                     child: GridView.builder(
-                      itemCount: Jalali(getSelectedYear(), getSelectedMonth()+1).monthLength,
+                      itemCount:
+                          Jalali(getSelectedYear(), getSelectedMonth() + 1)
+                              .monthLength,
                       gridDelegate:
                           new SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 7),
                       itemBuilder: (BuildContext context, int index) {
-                        return Container(
-                          width: double.infinity,
-                          alignment: Alignment.center,
-                          child: Text(
-                            replaceFarsiNumber((index + 1).toString()),
-                            style: TextStyle(fontSize: 18),
+                        return GestureDetector(
+                          onTap: () {
+                            widget.setDate(getSelectedYear().toString() +
+                                '/' +
+                                getSelectedMonth().toString() +
+                                '/' +
+                                (index + 1).toString());
+
+                            setState(() {
+                              _selectedDay = index;
+                            });
+                            print(_selectedDay.toString());
+                          },
+                          child: Container(
+                            width: double.infinity,
+                            // margin: EdgeInsets.all(4),
+                            decoration: BoxDecoration(
+                              color: index == _selectedDay
+                                  ? Colors.green
+                                  : Colors.transparent,
+                              borderRadius: BorderRadius.circular(100),
+                            ),
+                            alignment: Alignment.center,
+                            child: Text(
+                              replaceFarsiNumber((index + 1).toString()),
+                              style: TextStyle(fontSize: 18),
+                            ),
                           ),
                         );
                       },
+                    ),
+                  ),
+                ),
+                Line(),
+                Container(
+                  margin: EdgeInsets.only(bottom: 8, right: 8, left: 8),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(8)
+                  ),
+                  height: 33,
+                  width: double.infinity,
+                  child: FlatButton(
+                    onPressed: () {
+                      print("dialog closed");
+                    },
+                    child: Text(
+                      "بستن",
+                      style: TextStyle(
+                        color: Colors.blueAccent
+                      ),
                     ),
                   ),
                 )

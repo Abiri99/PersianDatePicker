@@ -7,16 +7,25 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  // var _visible = true;
+  
+
+  var selectedDate;
+  void setDate(String date) {
+    this.setState(() {
+      selectedDate = date;
+    });
+  }
+
+
   final controller = PageController(initialPage: 0);
 
   opendatepicker(BuildContext context) {
-    print("opendatepicker");
-
     showDialog(
         context: context,
         builder: (BuildContext context) {
-          return PdpDialog();
+          return PdpDialog(
+            setDate: setDate,
+          );
         });
   }
 
@@ -31,7 +40,7 @@ class _HomeState extends State<Home> {
       body: Center(
         child: RaisedButton(
           color: Colors.orange,
-          child: Text("open date picker"),
+          child: Text(selectedDate.toString()),
           onPressed: () {
             opendatepicker(context);
           },

@@ -13,24 +13,24 @@ class YearSlider extends StatelessWidget {
   Widget build(BuildContext context) {
     return slider(
       child: PageView.builder(
+        reverse: true,
         controller: _yearController,
         onPageChanged: onYearChanged,
         itemBuilder: (context, index) {
           var style = TextStyle(
             color: index == _selectedYear ? Colors.white : Colors.white30,
-            fontSize: index == _selectedYear ? 18 : 16,
+            fontSize: index == _selectedYear ? 20 : 18,
           );
-          var newIndex = index + 1000;
           return Align(
             alignment: Alignment.center,
             child: Text(
-              replaceFarsiNumber(newIndex.toString()),
+              replaceFarsiNumber(index.toString()),
               textAlign: TextAlign.center,
               style: style,
             ),
           );
         },
-        itemCount: 2000,
+        itemCount: 3000,
       ),
     );
   }

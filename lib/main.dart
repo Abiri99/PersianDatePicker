@@ -4,20 +4,6 @@ import './home.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-
-  openDatePicker(BuildContext context) {
-    print("openDatePicker");
-    return showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: new Text("تاریخ مورد نظر را انتخاب کنید"),
-          content: Text("content"),
-        );
-      }
-    );
-  }
-
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {

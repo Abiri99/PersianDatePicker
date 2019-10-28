@@ -1,3 +1,4 @@
+import 'package:fl_persian_date_picker/components/days_table.dart';
 import 'package:fl_persian_date_picker/components/line.dart';
 import 'package:fl_persian_date_picker/components/month_slider.dart';
 import 'package:fl_persian_date_picker/components/year_slider.dart';
@@ -10,7 +11,7 @@ class Pdp extends StatefulWidget {
   var setDate;
   PageController _yearController;
   PageController _monthController;
-  var currentDate = Jalali.now();
+  final currentDate = Jalali.now();
 
   Pdp(setDate) {
     this.setDate = setDate;
@@ -144,196 +145,118 @@ class _PdpState extends State<Pdp> {
     return _selectedMonth == null ? widget.currentDate.month : _selectedMonth;
   }
 
+  getMonthLength() {
+    return Jalali(getSelectedYear(), getSelectedMonth())
+                          .monthLength +
+                      Jalali(getSelectedYear(), getSelectedMonth(), 1).weekDay -
+                      1;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.71,
+      height: MediaQuery.of(context).size.height * 0.79,
       width: MediaQuery.of(context).size.width * 0.8,
+      padding: const EdgeInsets.only(top: 24),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(6),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           Container(
-            height: MediaQuery.of(context).size.height * 0.71,
-            width: double.infinity,
-            padding: const EdgeInsets.only(top: 24),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(4)),
-              color: Colors.blueAccent,
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                Container(
-                  child: Text(
-                    replaceFarsiNumber(formatPersianDate(widget.currentDate)),
-                    style: TextStyle(
-                      fontSize: 24,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 8,),
-                YearSlider(
-                    widget._yearController, _selectedYear, onYearChanged),
-                Line(),
-                MonthSlider(
-                    widget._monthController, _selectedMonth, onMonthChange),
-                // Line(),
-                SizedBox(
-                  height: 16,
-                ),
-                Container(
-                  padding: const EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    boxShadow: [
-                      const BoxShadow(
-                        color: Colors.black54,
-                        offset: const Offset(0.0, 0.0),
-                      ),
-                      const BoxShadow(
-                        color: Colors.blue,
-                        offset: const Offset(0.0, 0.0),
-                        spreadRadius: -2.0,
-                        blurRadius: 50.0,
-                      ),
-                    ],
-                  ),
-                  child: Table(
-                    textDirection: TextDirection.rtl,
-                    children: [
-                      TableRow(children: [
-                        TableCell(
-                          child: Text(
-                            'ش',
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                        TableCell(
-                          child: Text(
-                            'ی',
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                        TableCell(
-                          child: Text(
-                            'د',
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                        TableCell(
-                          child: Text(
-                            'س',
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                        TableCell(
-                          child: Text(
-                            'چ',
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                        TableCell(
-                          child: Text(
-                            'پ',
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                        TableCell(
-                          child: Text(
-                            'ج',
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                      ])
-                    ],
-                  ),
-                ),
-                SizedBox(height: 8,),
-                Expanded(
-                  // height: 100,
-                  // child: daysTable(firstDayName: Jalali(_selectedYear, _selectedMonth+1).formatter.wN,),
-                  child: Container(
-                    // color: Colors.red,
-                    padding: EdgeInsets.only(left: 8, right: 8, top: 0, bottom: 0),
-                    alignment: Alignment(0.0, 0.0),
-                    child: Directionality(
-                      textDirection: TextDirection.rtl,
-                      child: GridView.builder(
-                        itemCount: Jalali(getSelectedYear(), getSelectedMonth())
-                                .monthLength +
-                            Jalali(getSelectedYear(), getSelectedMonth(), 1)
-                                .weekDay -
-                            1,
-                        gridDelegate:
-                            new SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 7),
-                        itemBuilder: (BuildContext context, int index) {
-                          index -=
-                              Jalali(getSelectedYear(), getSelectedMonth(), 1)
-                                      .weekDay -
-                                  1;
-                          return index >= 0
-                              ? GestureDetector(
-                                  onTap: () {
-                                    widget.setDate(
-                                        getSelectedYear().toString() +
-                                            '/' +
-                                            getSelectedMonth().toString() +
-                                            '/' +
-                                            (index + 1).toString());
-
-                                    setState(() {
-                                      _selectedDay = index;
-                                    });
-                                    print(_selectedDay.toString());
-                                  },
-                                  child: Container(
-                                    width: double.infinity,
-                                    // margin: EdgeInsets.all(4),
-                                    decoration: BoxDecoration(
-                                      color: index == _selectedDay
-                                          ? Colors.white
-                                          : Colors.transparent,
-                                      borderRadius: BorderRadius.circular(100),
-                                    ),
-                                    alignment: Alignment.center,
-                                    child: Text(
-                                      replaceFarsiNumber(
-                                          (index + 1).toString()),
-                                      style: TextStyle(fontSize: 18, color: index == _selectedDay ? Colors.blue : Colors.white,),
-                                    ),
-                                  ),
-                                )
-                              : Text('');
-                        },
-                      ),
-                    ),
-                  ),
-                ),
-                Line(),
-                Container(
-                  margin: EdgeInsets.only(bottom: 8, right: 8, left: 8),
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(4)),
-                  height: 33,
-                  width: double.infinity,
-                  child: FlatButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: Text(
-                      "بستن",
-                      style: TextStyle(color: Colors.blue, fontSize: 16),
-                    ),
-                  ),
-                )
-              ],
+            margin: const EdgeInsets.only(bottom: 8),
+            child: Text(
+              replaceFarsiNumber(formatPersianDate(widget.currentDate)),
+              style: TextStyle(
+                fontSize: 24,
+                color: Colors.white,
+              ),
             ),
           ),
+          YearSlider(widget._yearController, _selectedYear, onYearChanged),
+          Line(),
+          MonthSlider(widget._monthController, _selectedMonth, onMonthChange),
+          // Line(),
+          SizedBox(
+            height: 16,
+          ),
+          DaysTable(),
+          SizedBox(
+            height: 8,
+          ),
+          Expanded(
+            // height: 100,
+            // child: daysTable(firstDayName: Jalali(_selectedYear, _selectedMonth+1).formatter.wN,),
+            child: Container(
+              // color: Colors.red,
+              padding: const EdgeInsets.only(left: 8, right: 8, top: 0, bottom: 0),
+              alignment: Alignment(0.0, 0.0),
+              child: Directionality(
+                textDirection: TextDirection.rtl,
+                child: GridView.builder(
+                  itemCount: getMonthLength(),
+                  gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 7),
+                  itemBuilder: (BuildContext context, int index) {
+                    index -= Jalali(getSelectedYear(), getSelectedMonth(), 1)
+                            .weekDay - 1;
+                    return index >= 0
+                        ? InkWell(
+                          borderRadius: BorderRadius.circular(100),
+                          splashColor: Colors.black38,
+                            onTap: () {
+                              widget.setDate(getSelectedYear().toString() +
+                                  '/' +
+                                  getSelectedMonth().toString() +
+                                  '/' +
+                                  (index + 1).toString());
+
+                              setState(() {
+                                _selectedDay = index;
+                              });
+                            },
+                            child: Container(
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                color: Colors.transparent,
+                                borderRadius: BorderRadius.circular(100),
+                              ),
+                              alignment: Alignment.center,
+                              child: Text(
+                                replaceFarsiNumber((index + 1).toString()),
+                                style: TextStyle(
+                                  fontSize: index == _selectedDay ? 24 : 18,
+                                  color: index == _selectedDay
+                                      ? Colors.white
+                                      : Colors.white60,
+                                ),
+                              ),
+                            ),
+                          )
+                        : Text('');
+                  },
+                ),
+              ),
+            ),
+          ),
+          Line(),
+          Container(
+            margin: EdgeInsets.only(bottom: 8, right: 8, left: 8),
+            decoration: BoxDecoration(
+                color: Colors.white, borderRadius: BorderRadius.circular(4)),
+            height: 33,
+            width: double.infinity,
+            child: FlatButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text(
+                "بستن",
+                style: TextStyle(color: Colors.blue, fontSize: 16),
+              ),
+            ),
+          )
         ],
       ),
     );

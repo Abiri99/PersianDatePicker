@@ -8,25 +8,24 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   
+  var selectedDate; //selected date stores date which user taped;
 
-  var selectedDate;
   void setDate(String date) {
     this.setState(() {
       selectedDate = date;
     });
   }
 
-
-  final controller = PageController(initialPage: 0);
-
+  //this function shows the datepicker dialog
   opendatepicker(BuildContext context) {
     showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return PdpDialog(
-            setDate: setDate,
-          );
-        });
+      context: context,
+      builder: (BuildContext context) {
+        return PdpDialog(
+          setDate: setDate,
+        );
+      },
+    );
   }
 
   @override
@@ -36,11 +35,10 @@ class _HomeState extends State<Home> {
       appBar: AppBar(
         title: Text("persian date picker"),
       ),
-      // backgroundColor: Colors.blue,
       body: Center(
         child: RaisedButton(
           color: Colors.orange,
-          child: Text(selectedDate.toString()),
+          child: selectedDate == null ? Text('انتخاب تاریخ') : Text(selectedDate.toString()),
           onPressed: () {
             opendatepicker(context);
           },

@@ -154,9 +154,12 @@ class _PdpState extends State<Pdp> {
 
   @override
   Widget build(BuildContext context) {
+
+    var mq = MediaQuery.of(context);
+
     return Container(
-      height: MediaQuery.of(context).size.height * 0.79,
-      width: MediaQuery.of(context).size.width * 0.8,
+      height: mq.size.height * 0.79,
+      width: mq.size.width * 0.8,
       padding: const EdgeInsets.only(top: 24),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(6),

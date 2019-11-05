@@ -232,7 +232,7 @@ class _PdpState extends State<Pdp> {
                                   fontSize: index == _selectedDay ? 24 : 18,
                                   color: index == _selectedDay
                                       ? Colors.white
-                                      : Colors.white60,
+                                      : Colors.white38,
                                 ),
                               ),
                             ),
@@ -256,7 +256,7 @@ class _PdpState extends State<Pdp> {
               },
               child: Text(
                 "بستن",
-                style: TextStyle(color: Colors.blue, fontSize: 16),
+                style: TextStyle(color: Colors.blue, fontSize: 16, fontWeight: FontWeight.bold),
               ),
             ),
           )

@@ -27,7 +27,7 @@ class _sliderState extends State<slider> {
               color: Colors.white38,
             ),
             Container(
-              width: MediaQuery.of(context).size.width * 0.6,
+              width: MediaQuery.of(context).size.width * 0.5,
               alignment: Alignment.center,
               child: widget.child,
               // child: PageView.builder(

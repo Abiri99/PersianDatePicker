@@ -126,14 +126,14 @@ class _PdpState extends State<Pdp> {
   onYearChanged(int number) {
     setState(() {
       _selectedYear = number;
-      _selectedDay = null;
+      // _selectedDay = null;
     });
   }
 
   onMonthChange(int monthIndex) {
     setState(() {
       _selectedMonth = monthIndex;
-      _selectedDay = null;
+      // _selectedDay = null;
     });
   }
 
@@ -229,8 +229,8 @@ class _PdpState extends State<Pdp> {
                               child: Text(
                                 replaceFarsiNumber((index + 1).toString()),
                                 style: TextStyle(
-                                  fontSize: index == _selectedDay ? 24 : 18,
-                                  color: index == _selectedDay
+                                  fontSize: index == _selectedDay && _selectedMonth == getSelectedMonth() && _selectedYear == getSelectedYear() ? 24 : 18,
+                                  color: index == _selectedDay && _selectedMonth == getSelectedMonth() && _selectedYear == getSelectedYear()
                                       ? Colors.white
                                       : Colors.white38,
                                 ),

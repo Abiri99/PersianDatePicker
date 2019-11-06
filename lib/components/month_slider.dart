@@ -10,7 +10,6 @@ class MonthSlider extends StatelessWidget {
   MonthSlider(this._monthController, this._selectedMonth, this.onMonthChange);
 
   String renderMonthsByIndex(int index) {
-    print("index: " + index.toString());
     switch (index) {
       case 0:
         return "فروردین";

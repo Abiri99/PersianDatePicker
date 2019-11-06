@@ -16,9 +16,9 @@ class Pdp extends StatefulWidget {
   Pdp(setDate) {
     this.setDate = setDate;
     _yearController =
-        PageController(viewportFraction: 0.25, initialPage: currentDate.year);
+        PageController(viewportFraction: 0.35, initialPage: currentDate.year);
     _monthController =
-        PageController(viewportFraction: 0.35, initialPage: currentDate.month);
+        PageController(viewportFraction: 0.45, initialPage: currentDate.month);
   }
 
   @override
@@ -142,13 +142,18 @@ class _PdpState extends State<Pdp> {
   }
 
   getSelectedMonth() {
+    print("widget.currentDate.month: ${widget.currentDate.month}");
+    print(_selectedMonth.toString());
     return _selectedMonth == null ? widget.currentDate.month : _selectedMonth;
   }
 
   getMonthLength() {
-    return Jalali(getSelectedYear(), getSelectedMonth())
+    var sm = getSelectedMonth();
+    var sy = getSelectedYear();
+    print(Jalali(sy, sm).monthLength);
+    return Jalali(sy, sm)
                           .monthLength +
-                      Jalali(getSelectedYear(), getSelectedMonth(), 1).weekDay -
+                      Jalali(sy, sm, 1).weekDay -
                       1;
   }
 
@@ -156,6 +161,9 @@ class _PdpState extends State<Pdp> {
   Widget build(BuildContext context) {
 
     var mq = MediaQuery.of(context);
+
+    var sm = getSelectedMonth();
+    var sy = getSelectedYear();
 
     return Container(
       height: mq.size.height * 0.79,
@@ -202,16 +210,16 @@ class _PdpState extends State<Pdp> {
                   gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 7),
                   itemBuilder: (BuildContext context, int index) {
-                    index -= Jalali(getSelectedYear(), getSelectedMonth(), 1)
+                    index -= Jalali(sy, sm, 1)
                             .weekDay - 1;
                     return index >= 0
                         ? InkWell(
                           borderRadius: BorderRadius.circular(100),
                           splashColor: Colors.black38,
                             onTap: () {
-                              widget.setDate(getSelectedYear().toString() +
+                              widget.setDate(sy.toString() +
                                   '/' +
-                                  getSelectedMonth().toString() +
+                                  sm.toString() +
                                   '/' +
                                   (index + 1).toString());
 
@@ -229,8 +237,8 @@ class _PdpState extends State<Pdp> {
                               child: Text(
                                 replaceFarsiNumber((index + 1).toString()),
                                 style: TextStyle(
-                                  fontSize: index == _selectedDay && _selectedMonth == getSelectedMonth() && _selectedYear == getSelectedYear() ? 24 : 18,
-                                  color: index == _selectedDay && _selectedMonth == getSelectedMonth() && _selectedYear == getSelectedYear()
+                                  fontSize: index == _selectedDay && _selectedMonth == sm && _selectedYear == sy ? 24 : 18,
+                                  color: index == _selectedDay && _selectedMonth == sm && _selectedYear == sy
                                       ? Colors.white
                                       : Colors.white38,
                                 ),

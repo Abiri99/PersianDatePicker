@@ -18,7 +18,7 @@ class Pdp extends StatefulWidget {
     _yearController =
         PageController(viewportFraction: 0.35, initialPage: currentDate.year);
     _monthController =
-        PageController(viewportFraction: 0.45, initialPage: currentDate.month);
+        PageController(viewportFraction: 0.45, initialPage: currentDate.month - 1);
   }
 
   @override
@@ -132,7 +132,7 @@ class _PdpState extends State<Pdp> {
 
   onMonthChange(int monthIndex) {
     setState(() {
-      _selectedMonth = monthIndex;
+      _selectedMonth = monthIndex + 1;
       // _selectedDay = null;
     });
   }
@@ -142,8 +142,6 @@ class _PdpState extends State<Pdp> {
   }
 
   getSelectedMonth() {
-    print("widget.currentDate.month: ${widget.currentDate.month}");
-    print(_selectedMonth.toString());
     return _selectedMonth == null ? widget.currentDate.month : _selectedMonth;
   }
 

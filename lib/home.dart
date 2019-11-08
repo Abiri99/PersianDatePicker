@@ -20,6 +20,7 @@ class _HomeState extends State<Home> {
   opendatepicker(BuildContext context) {
     showDialog(
       context: context,
+      barrierDismissible: false,
       builder: (BuildContext context) {
         return PdpDialog(
           setDate: setDate,

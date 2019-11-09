@@ -226,7 +226,12 @@ class _PdpState extends State<Pdp> {
                                   sy,
                                 ];
                               });
-                              widget.setDate(_selectedInfo);
+                              var temp = [
+                                index + 1,
+                                sm,
+                                sy,
+                              ];
+                              widget.setDate(temp);
                             },
                             child: Container(
                               width: double.infinity,

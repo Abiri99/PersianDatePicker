@@ -10,9 +10,9 @@ class _HomeState extends State<Home> {
   
   var selectedDate; //selected date stores date which user taped;
 
-  void setDate(String date) {
+  void setDate(var dateList) {
     this.setState(() {
-      selectedDate = date;
+      selectedDate = dateList[2].toString() + '/' + dateList[1].toString() + '/' + dateList[0].toString();
     });
   }
 

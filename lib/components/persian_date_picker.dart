@@ -29,6 +29,9 @@ class _PdpState extends State<Pdp> {
   var _selectedYear, _selectedMonth, _selectedDay;
   var currentDate = Jalali.now();
 
+  //_selectedInfo is used to know which year/month/day is selected
+  var _selectedInfo = [-1, -1, -1];
+
   List<Widget> renderMonths() {
     return [
       Container(
@@ -215,15 +218,15 @@ class _PdpState extends State<Pdp> {
                           borderRadius: BorderRadius.circular(100),
                           splashColor: Colors.black38,
                             onTap: () {
-                              widget.setDate(sy.toString() +
-                                  '/' +
-                                  sm.toString() +
-                                  '/' +
-                                  (index + 1).toString());
-
                               setState(() {
                                 _selectedDay = index;
+                                _selectedInfo = [
+                                  index,
+                                  sm,
+                                  sy,
+                                ];
                               });
+                              widget.setDate(_selectedInfo);
                             },
                             child: Container(
                               width: double.infinity,
@@ -235,8 +238,8 @@ class _PdpState extends State<Pdp> {
                               child: Text(
                                 replaceFarsiNumber((index + 1).toString()),
                                 style: TextStyle(
-                                  fontSize: index == _selectedDay && _selectedMonth == sm && _selectedYear == sy ? 24 : 18,
-                                  color: index == _selectedDay && _selectedMonth == sm && _selectedYear == sy
+                                  fontSize: index == _selectedInfo[0].toInt() && sm == _selectedInfo[1] && sy == _selectedInfo[2] ? 24 : 18,
+                                  color: index == _selectedInfo[0] && sm == _selectedInfo[1] && sy == _selectedInfo[2]
                                       ? Colors.white
                                       : Colors.white38,
                                 ),
